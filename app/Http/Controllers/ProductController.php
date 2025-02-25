@@ -13,19 +13,6 @@ class ProductController extends Controller
     {
         $this->apiUrl = env('MOCK_API_URL');
     }
-    public function updateUserInfo()
-    {
-        $response = Http::put("https://656ca88ee1e03bfd572e9c16.mockapi.io/products/32", [
-            'name'   => 'Trang',
-            'avatar' => 'https://cdn.kona-blue.com/upload/kona-blue_com/post/images/2024/08/14/363/hinh-anh-chibi-nu-cute-12.jpg',
-        ]);
-
-        if ($response->successful()) {
-            return "Cập nhật thành công!";
-        } else {
-            return "Lỗi cập nhật!";
-        }
-    }
 // Lấy danh sách sản phẩm từ Mock API
     public function index()
     {
