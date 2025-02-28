@@ -7,7 +7,7 @@
         </div>
         <div class="pull-right">
             <div class="beta-breadcrumb">
-                <a href="index.html">Home</a> / <span>Checkout</span>
+                <a href="{{ route('trang-chu') }}">Home</a> / <span>Checkout</span>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -77,7 +77,7 @@
                                 <div>
                                 <!--  one item	 -->
                                     <div class="media">
-                                        <img width="35%" src="assets/dest/images/shoping1.jpg" alt="" class="pull-left">
+                                        <img width="35%" src="source/source/assets/dest/images/shoping1.jpg" alt="" class="pull-left">
                                         <div class="media-body">
                                             <p class="font-large">Men's Belt</p>
                                             <span class="color-gray your-order-info">Color: Red</span>
