@@ -20,6 +20,7 @@
                 </ul>
             </div>
         @endif
+
     <form action="/products" method="POST" class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md mb-6">
         @csrf
         <h2 class="text-xl font-bold mb-4">Add New User</h2>
@@ -32,7 +33,11 @@
         
         <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md">Add User</button>
     </form>
-
+        @if (session('success'))
+            <div class="max-w-lg mx-auto bg-green-100 p-4 rounded-lg shadow-md mb-6">
+                <p class="text-green-700 font-semibold">{{ session('success') }}</p>
+            </div>
+        @endif
     <div class="container mx-auto py-10">
         <h1 class="text-3xl font-bold text-center mb-8">User List</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
