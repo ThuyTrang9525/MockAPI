@@ -93,9 +93,9 @@
 						<li><a href="{{ route('trang-chu') }}">Trang chủ</a></li>
 						<li><a href="{{ route('loaisanpham') }}">Sản phẩm</a>
 							<ul class="sub-menu">
-								<li><a href="{{ route('chitietsanpham') }}">Sản phẩm 1</a></li>
-								<li><a href="{{ route('chitietsanpham') }}">Sản phẩm 2</a></li>
-								<li><a href="{{ route('chitietsanpham') }}">Sản phẩm 3</a></li>
+								<li><a href="{{  route('chitietsanpham', ['id' => 1]) }}">Sản phẩm 1</a></li>
+								<li><a href="{{  route('chitietsanpham', ['id' => 2]) }}">Sản phẩm 2</a></li>
+								<li><a href="{{  route('chitietsanpham', ['id' => 2]) }}">Sản phẩm 3</a></li>
 							</ul>
 						</li>
 						<li><a href="{{ route('about') }}">Giới thiệu</a></li>
