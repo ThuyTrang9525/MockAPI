@@ -20,7 +20,7 @@
 		<div class="header-body">
 			<div class="container beta-relative">
 				<div class="pull-left">
-					<a href="{{ route('trang-chu') }}" id="logo"><img src="source/source/source/source/assets/dest/images/logo-cake.png" width="200px" alt=""></a>
+					<a href="{{ route('trang-chu') }}" id="logo"><img src="source/source/assets/dest/images/logo-cake.png" width="200px" alt=""></a>
 				</div>
 				<div class="pull-right beta-components space-left ov">
 					<div class="space10">&nbsp;</div>
@@ -33,7 +33,7 @@
 
 					<div class="beta-comp">
 						<div class="cart">
-							<div class="beta-select"><i class="fa fa-shopping-cart"></i> Giỏ hàng (Trống) <i class="fa fa-chevron-down"></i></div>
+							<div class="beta-select"><i class="fa fa-shopping-cart"></i><i class="fa fa-chevron-down"> <a href="{{ route('shopping_cart') }}">Xem giỏ hàng</a></i></div>
 							<div class="beta-dropdown cart-body">
 								<div class="cart-item">
 									<div class="media">
@@ -45,7 +45,6 @@
 										</div>
 									</div>
 								</div>
-
 								<div class="cart-item">
 									<div class="media">
 										<a class="pull-left" href="#"><img src="source/source/assets/dest/images/products/cart/2.png" alt=""></a>
@@ -91,11 +90,11 @@
 				<nav class="main-menu">
 					<ul class="l-inline ov">
 						<li><a href="{{ route('trang-chu') }}">Trang chủ</a></li>
-						<li><a href="{{ route('loaisanpham') }}">Sản phẩm</a>
+						<li><a href="/type/1">Sản phẩm</a>
 							<ul class="sub-menu">
-								<li><a href="{{  route('chitietsanpham', ['id' => 1]) }}">Sản phẩm 1</a></li>
-								<li><a href="{{  route('chitietsanpham', ['id' => 2]) }}">Sản phẩm 2</a></li>
-								<li><a href="{{  route('chitietsanpham', ['id' => 2]) }}">Sản phẩm 3</a></li>
+								@foreach($type_product as $type)
+									<li><a href="{{ route('loaisanpham', ['type_id' => $type->id]) }}">{{ $type->name }}</a></li>
+								@endforeach
 							</ul>
 						</li>
 						<li><a href="{{ route('about') }}">Giới thiệu</a></li>

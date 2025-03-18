@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Providers;
-
+use App\Models\TypeProduct;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,8 +18,12 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+   
+
+public function boot()
     {
-        //
+        $type_product = TypeProduct::all();
+        View::share('type_product', $type_product);
     }
+
 }
