@@ -6,7 +6,7 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 # Copy toàn bộ code vào container
 COPY . /var/www/html/
-
+WORKDIR /var/www/html/public
 # Cấp quyền cho thư mục
 RUN chown -R www-data:www-data /var/www/html
 
