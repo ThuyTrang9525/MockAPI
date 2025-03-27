@@ -63,3 +63,5 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('add-to-cart/{id}', [PageController::class, 'getAddToCart'])->name('themgiohang');
 Route::get('del-cart/{id}', [PageController::class, 'getDelItemCart'])->name('xoagiohang');
+
+Route::apiResource('products', ProductController::class);
