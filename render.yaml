@@ -1,12 +1,13 @@
 services:
   - type: web
-    name: my-php-app
+    name: trangspecial
+    env: php
     runtime: docker
     plan: free
-    repo: https://github.com/your-repo
+    repo: https://github.com/ThuyTrang9525/MockAPI.git
     region: oregon
-    rootDir: /
     envVars:
       - key: APP_ENV
         value: production
-    dockerCommand: docker build -t my-php-app .
+    buildCommand: "composer install && php artisan migrate --force"
+    startCommand: "php artisan serve --host 0.0.0.0 --port 10000"
