@@ -45,7 +45,7 @@
                                 <option value="4">4</option>
                                 <option value="5">5</option>
                             </select>
-                            <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i></a>
+                            <a class="add-to-cart pull-left" href="{route('themgiohang', ['id' => $product->id])}"><i class="fa fa-heart"></i></a>		
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -113,6 +113,7 @@
                     <div class="widget-body">
                         @foreach ($bestSellers as $product)
                             <div class="media beta-sales-item">
+                            <a class="add-to-cart pull-left" href="{route('themgiohang', ['id' => $product->id])}"><i class="fa fa-heart"></i></a>		
                                 <a class="pull-left" href="{{ route('chitietsanpham', ['id' => $product->id]) }}">
                                     <img src="source/source/image/product/{{ $product->image }}" alt="{{ $product->name }}">
                                 </a>
@@ -130,6 +131,7 @@
                     <div class="widget-body">
                         @foreach ($newProducts as $product)
                             <div class="media beta-sales-item">
+                            <a class="add-to-cart pull-left" href="{route('themgiohang', ['id' => $product->id])}"><i class="fa fa-heart"></i></a>		
                                 <a class="pull-left" href="{{ route('chitietsanpham', ['id' => $product->id])}}">
                                     <img src="source/source/image/product/{{ $product->image }}" alt="">
                                 </a>

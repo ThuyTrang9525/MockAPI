@@ -1601,7 +1601,7 @@ ul.children ul.children li:hover > a {
 }
 
 .beta-dropdown {
-    display: none;
+    display: block;
 }
 
 .beta-components {
@@ -1750,7 +1750,6 @@ ul.children ul.children li:hover > a {
     font-size: 20px;
     color: #f90;
 }
-
 /* ==========================================================================
     7. SEARCH FROM
 ============================================================================= */

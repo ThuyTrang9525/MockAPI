@@ -7,20 +7,22 @@ use App\Models\Slide;
 use App\Models\Product;
 use App\Models\Comment;
 use App\Models\TypeProduct;
+use App\Models\Cart;
+use Illuminate\Support\Facades\Session;
 class PageController extends Controller
 {
     public function index()
     {
         $slide = Slide::all();
-        $newProducts = Product::where('new', 1)->get(); // Lấy sản phẩm mới
-        $topProducts = Product::orderBy('unit_price', 'desc')->take(10)->get(); // Lấy 10 sản phẩm có giá cao nhất
+        $newProducts = Product::where('new', 1)->paginate(12); // Lấy sản phẩm mới
+        $topProducts = Product::orderBy('unit_price', 'desc')->take(10)->paginate(12); // Lấy 10 sản phẩm có giá cao nhất
         return view('page.trangchu', compact('slide', 'newProducts', 'topProducts'));
     }
 				
     public function getLoaiSp($type_id){	
         // $newProducts = Product::where('new', 1)->get(); // Lấy sản phẩm mới
         // $topProducts = Product::orderBy('unit_price', 'desc')->take(10)->get(); // Lấy 10 sản phẩm có giá cao nhất		
-        $type_product = TypeProduct::all();	
+        $type_product = TypeProduct::all();
         $sp_theoloai = Product::where('id_type', $type_id)->get();
         $sp_khac = Product::where('id_type','<>',$type_id)->paginate(3);	
     	return view('page.loai_sanpham',compact('type_product', 'sp_theoloai','sp_khac'));				
@@ -152,6 +154,30 @@ public function postAdminAdd(Request $request)
        
         return view('pageadmin.admin', compact('products'));
     }
+ 	
+    public function getAddToCart(Request $req, $id) {
+        $product = Product::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->add($product, $id);
+        
+        Session::put('cart', $cart); // Lưu session giỏ hàng
+        return redirect()->back();
+    }
+    public function getDelItemCart($id){
+        $oldCart = Session::has('cart')?Session::get('cart'):null;
+        $cart = new Cart($oldCart);
+        $cart->removeItem($id);
+        if(count($cart->items)>0){
+        Session::put('cart',$cart);
+
+        }
+        else{
+            Session::forget('cart');
+        }
+        return redirect()->back();
+    }
+
 }					
 					
 

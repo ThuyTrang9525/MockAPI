@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PageController;	
 use App\Http\Controllers\CartController;	
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +49,17 @@ Route::post('/admin-edit', [PageController::class, 'postAdminEdit'])->name('admi
 // Xóa sản phẩm
 Route::post('/admin-delete/{id}', [PageController::class, 'postAdminDelete'])->name('admin.delete');
 // Route::get('/san-pham/{id}', 'ProductController@show')->name('chitietsanpham');
+
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+// Hiển thị form đăng nhập
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
+
+// Xử lý đăng nhập
+Route::post('/loginn', [AuthController::class, 'login'])->name('loginn');
+
+// Xử lý đăng xuất
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('add-to-cart/{id}', [PageController::class, 'getAddToCart'])->name('themgiohang');
+Route::get('del-cart/{id}', [PageController::class, 'getDelItemCart'])->name('xoagiohang');

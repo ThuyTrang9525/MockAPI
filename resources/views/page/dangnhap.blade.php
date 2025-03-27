@@ -1,4 +1,5 @@
 @extends('master')
+
 @section('content')
 <div class="inner-header">
     <div class="container">
@@ -16,23 +17,34 @@
 	
 <div class="container">
     <div id="content">
-        
-        <form action="#" method="post" class="beta-form-checkout">
+        <form action="{{ route('loginn') }}" method="POST" class="beta-form-checkout">
+            @csrf  <!-- Bảo vệ CSRF -->
             <div class="row">
                 <div class="col-sm-3"></div>
                 <div class="col-sm-6">
                     <h4>Đăng nhập</h4>
                     <div class="space20">&nbsp;</div>
 
-                    
+                    <!-- Hiển thị thông báo lỗi -->
+                    @if(session('error'))
+                        <div class="alert alert-danger">{{ session('error') }}</div>
+                    @endif
+
+                    <!-- Hiển thị thông báo thành công -->
+                    @if(session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
+
                     <div class="form-block">
                         <label for="email">Email address*</label>
-                        <input type="email" id="email" required>
+                        <input type="email" name="email" id="email" required>
                     </div>
+
                     <div class="form-block">
-                        <label for="phone">Password*</label>
-                        <input type="text" id="phone" required>
+                        <label for="password">Password*</label>
+                        <input type="password" name="password" id="password" required>
                     </div>
+
                     <div class="form-block">
                         <button type="submit" class="btn btn-primary">Login</button>
                     </div>
