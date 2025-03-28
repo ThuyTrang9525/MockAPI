@@ -26,8 +26,8 @@ services:
       DB_HOST: mysql-db
       DB_PORT: 3306 # Cần khớp với MySQL container
       DB_DATABASE: db_banhang
-      DB_USERNAME: user
-      DB_PASSWORD: password
+      DB_USERNAME: root
+      DB_PASSWORD: 
     ports:
       - "8000:80"
     volumes:
