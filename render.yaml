@@ -1,23 +1,43 @@
+version: '3.8'
 services:
-  - type: web
-    name: trangspecial
-    env: php
-    runtime: docker
-    plan: free
-    repo: https://github.com/ThuyTrang9525/MockAPI.git
-    region: oregon
-    envVars:
-      - key: APP_ENV
-        value: production
-      - key: APP_KEY
-        generateValue: true
-      - key: DB_CONNECTION
-        value: sqlite
-      - key: DB_DATABASE
-        value: /tmp/database.sqlite
-    buildCommand: |
-      composer install --no-dev --optimize-autoloader
-      php artisan config:cache
-      php artisan route:cache
-      php artisan migrate --force
-    startCommand: "php-fpm -D && nginx -g 'daemon off;'"
+  mysql-db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_banhang
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306" # Sửa lại để Laravel có thể kết nối đúng
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  laravel-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql-db
+    environment:
+      APP_ENV: production
+      APP_KEY: base64:randomgeneratedkey
+      DB_CONNECTION: mysql
+      DB_HOST: mysql-db
+      DB_PORT: 3306 # Cần khớp với MySQL container
+      DB_DATABASE: db_banhang
+      DB_USERNAME: user
+      DB_PASSWORD: password
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+    command: >
+      sh -c "composer install --no-dev --optimize-autoloader &&
+             php artisan config:cache &&
+             php artisan route:cache &&
+             php artisan migrate --force &&
+             php-fpm -D && nginx -g 'daemon off;'"
+
+volumes:
+  mysql_data:
