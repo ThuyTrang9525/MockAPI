@@ -9,5 +9,15 @@ services:
     envVars:
       - key: APP_ENV
         value: production
-    buildCommand: "composer install && php artisan migrate --force"
-    startCommand: "php artisan serve --host 0.0.0.0 --port 10000"
+      - key: APP_KEY
+        generateValue: true
+      - key: DB_CONNECTION
+        value: sqlite
+      - key: DB_DATABASE
+        value: /tmp/database.sqlite
+    buildCommand: |
+      composer install --no-dev --optimize-autoloader
+      php artisan config:cache
+      php artisan route:cache
+      php artisan migrate --force
+    startCommand: "php-fpm -D && nginx -g 'daemon off;'"
