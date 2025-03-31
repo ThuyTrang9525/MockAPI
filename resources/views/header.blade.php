@@ -32,55 +32,55 @@
 					</div>
 
 					<div class="beta-comp">
-					<div class="cart">
-						<div class="beta-select">
-							<i class="fa fa-shopping-cart"></i> Giỏ hàng 
-							({{ Session::has('cart') ? Session('cart')->totalQty : 0 }}) 
-							<i class="fa fa-chevron-down"></i>
-						</div>
-						<div class="beta-dropdown cart-body">
-							@if(Session::has('cart') && count($product_cart) > 0)
-								@foreach($product_cart as $product)
-								<div class="cart-item">
-									<a class="cart-item-delete" href="{{ route('xoagiohang', $product['item']['id']) }}">
-										<i class="fa fa-times"></i>
-									</a>
-									<div class="media">
-										<a class="pull-left" href="#">
-											<img src="source/source/image/product/{{ $product['item']['image'] }}" alt="">
+						<div class="cart">
+							<div class="beta-select">
+								<i class="fa fa-shopping-cart"></i> Giỏ hàng 
+								({{ Session::has('cart') ? Session('cart')->totalQty : 0 }}) 
+								<i class="fa fa-chevron-down"></i>
+							</div>
+							<div class="beta-dropdown cart-body">
+								@if(Session::has('cart') && count($product_cart) > 0)
+									@foreach($product_cart as $product)
+									<div class="cart-item">
+										<a class="cart-item-delete" href="{{ route('xoagiohang', $product['item']['id']) }}">
+											<i class="fa fa-times"></i>
 										</a>
-										<div class="media-body">
-											<span class="cart-item-title">{{ $product['item']['name'] }}</span>
-											<span class="cart-item-amount">
-												{{ $product['qty'] }} X 
-												@if($product['item']['promotion_price'] > 0)
-													{{ number_format($product['item']['promotion_price'], 0, ',', '.') }} VNĐ
-												@else
-													{{ number_format($product['item']['unit_price'], 0, ',', '.') }} VNĐ
-												@endif
-											</span>
+										<div class="media">
+											<a class="pull-left" href="#">
+												<img src="source/source/image/product/{{ $product['item']['image'] }}" alt="">
+											</a>
+											<div class="media-body">
+												<span class="cart-item-title">{{ $product['item']['name'] }}</span>
+												<span class="cart-item-amount">
+													{{ $product['qty'] }} X 
+													@if($product['item']['promotion_price'] > 0)
+														{{ number_format($product['item']['promotion_price'], 0, ',', '.') }} VNĐ
+													@else
+														{{ number_format($product['item']['unit_price'], 0, ',', '.') }} VNĐ
+													@endif
+												</span>
+											</div>
 										</div>
 									</div>
-								</div>
-								@endforeach
-								<div class="cart-caption">
-									<div class="cart-total text-right">
-										Tổng tiền: 
-										<span class="cart-total-value">
-											{{ Session::has('cart') ? number_format(Session::get('cart')->totalPrice, 0, ',', '.') : '0' }} đồng
-										</span>
+									@endforeach
+									<div class="cart-caption">
+										<div class="cart-total text-right">
+											Tổng tiền: 
+											<span class="cart-total-value">
+												{{ Session::has('cart') ? number_format(Session::get('cart')->totalPrice, 0, ',', '.') : '0' }} đồng
+											</span>
+										</div>
+										<div class="center">
+											<a href="" class="beta-btn primary">Đặt hàng <i class="fa fa-chevron-right"></i></a>
+										</div>
 									</div>
-									<div class="center">
-										<a href="" class="beta-btn primary">Đặt hàng <i class="fa fa-chevron-right"></i></a>
-									</div>
-								</div>
-							@else
-								<p>Giỏ hàng trống!</p>
-							@endif
+								@else
+									<p>Giỏ hàng trống!</p>
+								@endif
+							</div>
+							</div>
 						</div>
 					</div>
-				</div>
-				</div>
 				<div class="clearfix"></div>
 			</div> <!-- .container -->
 		</div> <!-- .header-body -->

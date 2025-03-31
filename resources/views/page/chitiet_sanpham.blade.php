@@ -131,7 +131,7 @@
                     <div class="widget-body">
                         @foreach ($newProducts as $product)
                             <div class="media beta-sales-item">
-                            <a class="add-to-cart pull-left" href="{route('themgiohang', ['id' => $product->id])}"><i class="fa fa-heart"></i></a>		
+                                <a class="add-to-cart pull-left" href="{route('themgiohang', ['id' => $product->id])}"><i class="fa fa-heart"></i></a>		
                                 <a class="pull-left" href="{{ route('chitietsanpham', ['id' => $product->id])}}">
                                     <img src="source/source/image/product/{{ $product->image }}" alt="">
                                 </a>

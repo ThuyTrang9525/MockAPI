@@ -60,7 +60,7 @@
                     </p>													
                   </div>													
                   <div class="single-item-caption">																						
-                    <a class="add-to-cart pull-left" href="{route('themgiohang', ['id' => $sp->id])}"><i class="fa fa-heart"></i></a>													
+                    <a class="add-to-cart pull-left" href="{{route('themgiohang', ['id' => $sp->id])}}"><i class="fa fa-shopping-cart""></i></a>															
                     <a class="beta-btn primary" href="{{ route('chitietsanpham', ['id' => $sp->id]) }}">Details <i class="fa fa-chevron-right"></i></a>													
                     <div class="clearfix"></div>													
                   </div>													
@@ -82,7 +82,7 @@
               @foreach($sp_khac as $khac)													
               <div class="col-sm-3">													
                 <div class="single-item">													
-                  <div class="single-item-header">													
+                  <div class="single-item-header">												
                     <a href="{{ route('chitietsanpham', ['id' => $sp->id]) }}"><img width="200" height="200" src=" source/source/image/product/{{$khac->image}}" alt=""></a>													
                   </div>													
                   @if($khac->promotion_price==!0)													
@@ -103,7 +103,7 @@
                     </p>													
                   </div>													
                   <div class="single-item-caption">													
-                    <a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>													
+                  <a class="add-to-cart pull-left" href="{{ route('themgiohang',$sp->id) }}"><i class="fa fa-shopping-cart"></i></a>											
                     <a class="beta-btn primary" href="{{ route('chitietsanpham', ['id' => $sp->id]) }}">Details <i class="fa fa-chevron-right"></i></a>													
                     <div class="clearfix"></div>													
                   </div>													

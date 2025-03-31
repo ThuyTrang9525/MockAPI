@@ -5,75 +5,52 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
-    public function showRegisterForm()
-    {
-        return view('page.dangky'); // Trả về trang đăng ký
-    }
-
-    public function register(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
+        // 📌 Hiển thị form đăng ký
+        public function getRegister() {
+            return view('page.dangky'); // View đăng ký
+        }
     
-        // Tạo user mới
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password), // Dùng Hash::make()
-        ]);
+        // 📌 Xử lý đăng ký
+        public function postRegister(Request $request) {
+            $request->validate([
+                'name' => 'required|string',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|string|min:6|confirmed',
+            ]);
     
-        // Kiểm tra xem user đã tạo thành công chưa
-        if ($user) {
-            Auth::login($user);
-            return redirect()->route('login.form')->with('success', 'Đăng ký thành công!');
-        } else {
-            return back()->with('error', 'Đăng ký thất bại, vui lòng thử lại.');
+            User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+            ]);
+    
+            return redirect()->route('login.form')->with('success', 'Đăng ký thành công! Hãy đăng nhập.');
+        }
+    
+        // 📌 Hiển thị form đăng nhập
+        public function getLogin() {
+            return view('page.dangnhap'); // View đăng nhập
+        }
+    
+        // 📌 Xử lý đăng nhập
+        public function postLogin(Request $request) {
+            $credentials = $request->only('email', 'password');
+    
+            if (Auth::attempt($credentials)) {
+                return redirect()->route('trang-chu')->with('success', 'Đăng nhập thành công!');
+            } else {
+                return back()->with('error', 'Đăng nhập thất bại. Vui lòng kiểm tra lại email và mật khẩu.');
+            }
+        }
+    
+        // 📌 Đăng xuất
+        public function Logout() {
+            Auth::logout();
+            return redirect()->route('login.form')->with('success', 'Đã đăng xuất thành công.');
         }
     }
-// Hiển thị form đăng nhập
-public function showLoginForm()
-{
-    return view('page.dangnhap'); // Đảm bảo có file login.blade.php
-}
-
-// Xử lý đăng nhập
-public function login(Request $request)
-{
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required'
-    ]);
-
-    // Lấy user từ database
-    $user = User::where('email', $request->email)->first();
-
-    // Debug dữ liệu
-    if (!$user) {
-        return back()->with('error', 'Email không tồn tại!');
-    }
-
-    // Kiểm tra mật khẩu thủ công
-    if (!Hash::check($request->password, $user->password)) {
-        return back()->with('error', 'Sai mật khẩu!');
-    }
-
-    // Đăng nhập bằng Auth
-    if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-        return redirect()->route('home')->with('success', 'Đăng nhập thành công!');
-    }
-
-    return back()->with('error', 'Email hoặc mật khẩu không đúng!');
-}
-// Xử lý đăng xuất
-public function logout()
-{
-    Auth::logout();
-    return redirect()->route('login.form')->with('success', 'Đã đăng xuất thành công!');
-}
-}
+    

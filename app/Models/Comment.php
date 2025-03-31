@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    protected $table = 'comments';
-    protected $primaryKey = 'id';
+    use HasFactory;
+
+    protected $table = 'comments'; // Đảm bảo tên bảng đúng
 
     public function product()
     {
-        return $this->belongsTo(Product::class, 'id');
+        return $this->belongsTo(Product::class, 'id_product'); // Đổi 'product_id' thành 'id_product'
     }
 }
 

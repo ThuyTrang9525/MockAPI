@@ -163,7 +163,8 @@ public function postAdminAdd(Request $request)
         
         Session::put('cart', $cart); // Lưu session giỏ hàng
         return redirect()->back();
-    }
+    }		
+
     public function getDelItemCart($id){
         $oldCart = Session::has('cart')?Session::get('cart'):null;
         $cart = new Cart($oldCart);

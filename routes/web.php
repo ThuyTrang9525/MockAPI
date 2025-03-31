@@ -50,18 +50,24 @@ Route::post('/admin-edit', [PageController::class, 'postAdminEdit'])->name('admi
 Route::post('/admin-delete/{id}', [PageController::class, 'postAdminDelete'])->name('admin.delete');
 // Route::get('/san-pham/{id}', 'ProductController@show')->name('chitietsanpham');
 
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
-Route::post('/register', [AuthController::class, 'register'])->name('register');
-// Hiển thị form đăng nhập
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
+// Trang đăng ký (get và post request)
+Route::get('/register', [AuthController::class, 'getRegister'])->name('register.form');
+Route::post('/register', [AuthController::class, 'postRegister'])->name('register');
 
-// Xử lý đăng nhập
-Route::post('/loginn', [AuthController::class, 'login'])->name('loginn');
+// Trang đăng nhập (get và post request)
+Route::get('/login', [AuthController::class, 'getLogin'])->name('login.form');
+Route::post('/login', [AuthController::class, 'postLogin'])->name('login');
 
-// Xử lý đăng xuất
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+// Đăng xuất
+Route::get('/logout', [AuthController::class, 'Logout'])->name('logout');
+
+Route::get('/shopping-cart', [CartController::class, 'index'])->name('shopping.cart');
+
+
+
 
 Route::get('add-to-cart/{id}', [PageController::class, 'getAddToCart'])->name('themgiohang');
 Route::get('del-cart/{id}', [PageController::class, 'getDelItemCart'])->name('xoagiohang');
 
 Route::apiResource('products', ProductController::class);
+
