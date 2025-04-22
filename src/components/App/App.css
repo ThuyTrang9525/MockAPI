@@ -1,42 +1,65 @@
 .App {
   text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  padding: 20px;
 }
+
+/* Square in the Game (like Caro) */
 .square {
   background: #fff;
-  border: 1px solid #999;
+  border: 2px solid #666;
   float: left;
   font-size: 36px;
   font-weight: bold;
   line-height: 60px;
-  height: 120px;
-  width: 120px;
+  height: 100px;
+  width: 100px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
+.square:hover {
+  background-color: #f0f0f0;
+}
+
+/* Rows in board */
 .board-row:after {
   clear: both;
   content: "";
   display: table;
 }
 
-.status {
-  margin-bottom: 10px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
+/* Game container */
 .game {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 30px;
 }
 
+/* Game info box */
 .game-info {
-  margin-left: 20px;
+  margin-left: 40px;
+  text-align: left;
+  max-width: 200px;
+  font-size: 18px;
 }
 
+/* Game status */
+.status {
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #444;
+}
+
+/* Default React app styles */
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -70,4 +93,137 @@
   to {
     transform: rotate(360deg);
   }
+}
+/* === General Layout === */
+#container {
+  width: 90%;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+#content {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+/* === Sidebar (Left Menu) === */
+#left-content {
+  width: 20%;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#left-content h1 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+ul.drop {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul.drop li {
+  position: relative;
+  padding: 8px;
+  background: #fff;
+  border: 1px solid #ccc;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+ul.drop li:hover {
+  background: #dfefff;
+}
+
+ul.drop li ul.drop {
+  display: none;
+  margin-top: 5px;
+  padding-left: 10px;
+}
+
+ul.drop li:hover > ul.drop {
+  display: block;
+}
+
+/* === Products Area === */
+#right-content {
+  width: 80%;
+}
+
+#right-content h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#products .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.product {
+  width: calc(33.33% - 20px);
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.product:hover {
+  transform: translateY(-5px);
+}
+
+.p-name a {
+  font-size: 20px;
+  font-weight: bold;
+  color: #007acc;
+  text-decoration: none;
+}
+
+.p-img img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+}
+
+.p-cat {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 5px;
+}
+
+.p-price {
+  font-size: 18px;
+  color: #e91e63;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.button {
+  background-color: #007acc;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.button:hover {
+  background-color: #005fa3;
+}
+
+/* === Utility === */
+.clear {
+  clear: both;
 }
