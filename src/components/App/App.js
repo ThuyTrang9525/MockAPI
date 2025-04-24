@@ -14,16 +14,16 @@ import { data } from "./data";
 import Counter from "./Counter";
 import Dientich_hcn  from "./Dientich_hcn";
 import State1 from "./State1";
+import ProductList from "../ProductList";
 
 class App extends Component {
  
   render() {
     return (
       <div id="container">
-        <Header />
-        <State1 />
-        <Footer />
+      <ProductList/>
       </div>
+      
         
     );
   }
