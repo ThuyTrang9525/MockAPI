@@ -152,17 +152,19 @@ import { useState, useEffect } from 'react';
 // }
 
 
-
 export default function CafeMenu() {
   const [inputs, setInputs] = useState({ name: '', price: '', image: '' });
   const [products, setProducts] = useState([]);
-  const [editIndex, setEditIndex] = useState(-1); // -1 nghĩa là không đang sửa món nào
+  const [editId, setEditId] = useState(null); // Dùng editId thay vì editIndex
 
   // Load danh sách từ sessionStorage khi component mount
   useEffect(() => {
     const saved = sessionStorage.getItem('products');
     if (saved) {
       setProducts(JSON.parse(saved));
+    } else {
+      setProducts(data); // Nếu chưa có thì load từ file data.js
+      sessionStorage.setItem('products', JSON.stringify(data)); // và lưu vào sessionStorage
     }
   }, []);
 
@@ -175,35 +177,43 @@ export default function CafeMenu() {
   // Thêm hoặc cập nhật món
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (editIndex === -1) {
+    if (!inputs.name || !inputs.price || !inputs.image) {
+      alert("Vui lòng điền đầy đủ thông tin món ăn.");
+      return;
+    }
+
+    if (editId === null) {
       // Thêm mới
-      const updated = [...products, inputs];
+      const updated = [...products, { ...inputs, id: Date.now() }];
       setProducts(updated);
       sessionStorage.setItem('products', JSON.stringify(updated));
     } else {
       // Cập nhật món đang chỉnh sửa
-      const updated = [...products];
-      updated[editIndex] = inputs;
+      const updated = products.map(p =>
+        p.id === editId ? { ...inputs, id: editId } : p
+      );
       setProducts(updated);
       sessionStorage.setItem('products', JSON.stringify(updated));
-      setEditIndex(-1); // reset chế độ sửa
+      setEditId(null); // Reset chế độ sửa
     }
+
     setInputs({ name: '', price: '', image: '' });
   };
 
   // Xóa món
-  const handleDelete = (index) => {
+  const handleDelete = (id) => {
     if (window.confirm('Bạn có chắc chắn muốn xóa món này?')) {
-      const updated = products.filter((_, i) => i !== index);
+      const updated = products.filter((p) => p.id !== id);
       setProducts(updated);
       sessionStorage.setItem('products', JSON.stringify(updated));
     }
   };
 
   // Bắt đầu sửa món
-  const handleEdit = (index) => {
-    setEditIndex(index);
-    setInputs(products[index]);
+  const handleEdit = (id) => {
+    const productToEdit = products.find(p => p.id === id);
+    setEditId(id);
+    setInputs(productToEdit);
   };
 
   return (
@@ -246,7 +256,7 @@ export default function CafeMenu() {
           />
         </div>
 
-        <button type="submit">{editIndex === -1 ? 'Thêm món' : 'Cập nhật món'}</button>
+        <button type="submit">{editId === null ? 'Thêm món' : 'Cập nhật món'}</button>
       </form>
 
       <h2>Danh sách món</h2>
@@ -254,21 +264,21 @@ export default function CafeMenu() {
         <p>Chưa có món nào trong menu.</p>
       ) : (
         <ul className="product-list">
-          {products.map((p, i) => (
-            <li className="product-card" key={i}>
+          {products.map((p) => (
+            <li className="product-card" key={p.id}>
               <img
                 className="product-image"
                 src={p.image}
                 alt={p.name}
-                onError={e => { e.target.src = 'https://via.placeholder.com/180'; }}
+                onError={(e) => { e.target.src = 'https://via.placeholder.com/180'; }}
               />
               <div className="product-info">
                 <strong>{p.name}</strong>
                 <span>{parseInt(p.price).toLocaleString()} VND</span>
               </div>
               <div className="product-actions">
-                <button onClick={() => handleEdit(i)}>Sửa</button>
-                <button onClick={() => handleDelete(i)}>Xóa</button>
+                <button onClick={() => handleEdit(p.id)}>Sửa</button>
+                <button onClick={() => handleDelete(p.id)}>Xóa</button>
               </div>
             </li>
           ))}
