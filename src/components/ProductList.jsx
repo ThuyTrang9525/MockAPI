@@ -48,14 +48,26 @@ const ProductList = () => {
       .catch((err) => console.error("API error:", err));
   }, []);
 
+  // 👉 Lọc sản phẩm có khuyến mãi
+  const discountedProducts = products.filter(p => p.promotion_price > 0);
+
+  // 👉 Tính tổng giá gốc tất cả sản phẩm
+  const totalUnitPrice = products.reduce((sum, p) => sum + p.unit_price, 0);
+
   return (
     <div className="p-8 bg-gray-50 min-h-screen">
-      <h2 className="text-3xl font-bold mb-6 text-center">Danh sách sản phẩm</h2>
+      <h2 className="text-3xl font-bold mb-4 text-center">Danh sách sản phẩm</h2>
+
+      {/* Tổng giá trị */}
+      <p className="text-center text-gray-700 mb-6">
+        Tổng giá gốc: <span className="font-semibold">{totalUnitPrice.toLocaleString()}đ</span>
+      </p>
+
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products.map(product => (
+        {discountedProducts.map(product => (
           <div key={product.id} className="bg-white shadow-lg rounded-xl overflow-hidden hover:scale-105 transition transform duration-300">
             <img
-              src={`http://127.0.0.1:8000/images/products/${product.image}`} // chỉnh lại nếu đường ảnh khác
+              src={`http://127.0.0.1:8000/images/products/${product.image}`}
               alt={product.name}
               className="h-48 w-full object-cover"
             />
@@ -63,14 +75,8 @@ const ProductList = () => {
               <h3 className="text-xl font-semibold">{product.name}</h3>
               <p className="text-gray-600 text-sm mt-1">{product.description}</p>
               <div className="mt-3 flex items-center space-x-2">
-                {product.promotion_price > 0 ? (
-                  <>
-                    <span className="text-red-600 font-bold">{product.promotion_price.toLocaleString()}đ</span>
-                    <span className="line-through text-gray-400 text-sm">{product.unit_price.toLocaleString()}đ</span>
-                  </>
-                ) : (
-                  <span className="text-black font-bold">{product.unit_price.toLocaleString()}đ</span>
-                )}
+                <span className="text-red-600 font-bold">{product.promotion_price.toLocaleString()}đ</span>
+                <span className="line-through text-gray-400 text-sm">{product.unit_price.toLocaleString()}đ</span>
                 <span className="text-sm text-gray-500">/ {product.unit}</span>
               </div>
             </div>
@@ -80,5 +86,6 @@ const ProductList = () => {
     </div>
   );
 };
+
 export default ProductList;
 

@@ -70,6 +70,60 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.product-list {
+  display: flex;
+  overflow-x: auto; /* Cho phép cuộn ngang nếu nhiều món */
+  padding: 10px 0;
+  list-style: none;
+  gap: 20px; /* Khoảng cách giữa các món */
+}
+
+.product-card {
+  min-width: 200px; /* Độ rộng cố định của mỗi card */
+  flex-shrink: 0; /* Không co lại khi thiếu chỗ */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  background-color: #fff;
+}
+
+.product-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-info {
+  margin-top: 10px;
+}
+
+.product-actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.product-actions button {
+  padding: 5px 10px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.product-actions button:hover {
+  background-color: #0056b3;
+}
 
 .App-header {
   background-color: #282c34;
