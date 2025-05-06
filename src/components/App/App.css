@@ -70,211 +70,50 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-/* Container chung */
-.container {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #fff;
+.card {
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-/* Tiêu đề */
-h2 {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #4e342e;
-}
-
-/* Form nhập liệu */
-form {
-  background: #f8f5f2;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  margin-bottom: 40px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-}
-
-label {
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: #5d4037;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="url"] {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 16px;
-}
-
-button[type="submit"] {
-  background-color: #8d6e63;
-  color: #fff;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
-}
-
-button[type="submit"]:hover {
-  background-color: #6d4c41;
-}
-
-/* Danh sách sản phẩm */
-.product-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  list-style: none;
-  padding: 0;
-  justify-content: center; /* căn giữa */
-}
-
-/* Card món */
-.product-card {
-  background: #fff3e0;
-  border-radius: 12px;
-  width: 220px;
-  padding: 15px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: transform 0.2s;
-}
-
-.product-card:hover {
+.card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Hình món */
-.product-image {
-  width: 180px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 10px;
-}
-
-/* Thông tin món */
-.product-info {
-  text-align: center;
-  margin-bottom: 12px;
-}
-
-.product-info strong {
-  display: block;
-  font-size: 18px;
-  margin-bottom: 5px;
-  color: #4e342e;
-}
-
-.product-info span {
-  color: #6d4c41;
-  font-weight: 600;
-}
-
-/* Nút hành động */
-.product-actions {
-  display: flex;
-  gap: 10px;
-}
-
-.product-actions button {
-  background-color: #a1887f;
-  color: white;
+.btn-success {
+  background-color: #2d6a4f;
   border: none;
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s;
 }
-
-.product-actions button:hover {
-  background-color: #795548;
+.btn-success:hover {
+  background-color: #40916c;
 }
-
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
+.menu-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
   padding: 20px;
 }
 
-.product-list {
-  display: flex;
-  overflow-x: auto; /* Cho phép cuộn ngang nếu nhiều món */
-  padding: 10px 0;
-  list-style: none;
-  gap: 20px; /* Khoảng cách giữa các món */
-}
-
-.product-card {
-  min-width: 200px; /* Độ rộng cố định của mỗi card */
-  flex-shrink: 0; /* Không co lại khi thiếu chỗ */
-  border: 1px solid #ccc;
-  border-radius: 10px;
+.card {
+  background: white;
   padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   text-align: center;
-  background-color: #fff;
 }
 
-.product-image {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 8px;
+h3 {
+  margin: 10px 0 5px;
+  font-size: 18px;
+  color: #333;
 }
 
-.product-info {
-  margin-top: 10px;
+p {
+  margin: 2px 0;
+  color: #777;
 }
 
-.product-actions {
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.product-actions button {
-  padding: 5px 10px;
-  border: none;
-  background-color: #007bff;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.product-actions button:hover {
-  background-color: #0056b3;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
 
 @keyframes App-logo-spin {
   from {
